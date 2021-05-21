@@ -13,6 +13,10 @@ Log.d("BasicSyntax", "제 이름은 $name 입니다")
 * const val
   * val 과 같이 읽기전용인 것은 동일하지만, 런타임시에 할당되는 val과 달리 const val은 컴파일 시에 값이 결정되기 때문에 Int, Long 같은 기본 형과 String 형만 입력할 수 있다.  
   * 내가 만든 클래스를 할당할 수 없다는 의미.
+  * const val 은 companion object에 넣어서 static final 처럼 쓸 수 있다. (그냥 const val 만 쓰면 클래스의 프로퍼티로 사용하지 못한다.)
+  * 참고
+    * https://kimch3617.tistory.com/entry/Kotlin%EC%97%90%EC%84%9C-val-%EC%99%80-const-val-%EC%9D%98-%EC%B0%A8%EC%9D%B4
+    * https://www.bsidesoft.com/8187
 
 # 2. when 문
 * switch - case 와 동일하다.
@@ -82,16 +86,16 @@ var map = mutableMapOf<String, String>()
 map.put("hello","me")
 map.get("hello")
 map.remove("hello")
-```
-
+```  
+  
 # 5. 이뮤터블 컬렉션
 * 접두어 mutable을 빼고 만들면 이뮤터블 컬렉션이다.
 * 처음 값을 입력 후, 추후 수정이 불가능한 컬렉션이다.
 * add 나 set을 제공하지 않는다.
 ```kotlin
 val immutableList = listOf("JAN","FEB", "MAR")
-```
-
+```  
+  
 # 6. for문
 ```kotlin
 for (i in 1..10) {
@@ -118,3 +122,29 @@ for ( i in list ) {
   // list 안의 값이 나온다.
   Log.d("for", "현재 리스트 값은 ${i}")  
 }
+```
+  
+# 7. 함수
+
+```kotlin
+fun 함수명(파라미터 이름 : 타입): 반환 타입 {
+  return 값
+}
+```
+  
+* 함수 인자
+  * 함수에 입력되는 파라미터는 마치 변수를 정의하듯이 '이름: 타입' 형태
+  * 여러개의 파라미터가 정의될때는 콤마로 구분한다.
+  * 코틀린에서 함수 파라미터로 입력되는 모든 값은 이뮤터블 값으로 앞에 val 가 생략된 형태라고 생각할 수 있다.
+  * 등호를 이용해서 기본값을 설정할 수 있다. 
+```kotlin
+fun 함수명 ((val 생략) name1: String, name2: Int = 30, name3: Double) { 실행코드 }
+```
+
+* 함수를 사용할때 마치 파이썬 처럼 파라미터 이름을 직접 지정해서 사용할 수 있다.
+```kotlin
+fun newFunction(name: String, age: Int = 29, weight: Double = 65) {
+}
+
+new Function("cykei", weight = 48)
+```
