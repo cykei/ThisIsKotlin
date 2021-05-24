@@ -147,4 +147,89 @@ fun newFunction(name: String, age: Int = 29, weight: Double = 65) {
 }
 
 new Function("cykei", weight = 48)
+```  
+
+# 8. 클래스
+* 생성자
+  * primary 생성자 - primary 생성자가 호출되면 클래스의 init 프로세스가 실행된다. init 프로세스가 필요하지 않으면 굳이 init을 블록을 작성하지 않아도 된다.
+  ```kotlin
+  class Person constructor(value: String) {
+     init { 
+      value = ~~
+      // 생성자의 파라미터로 넘겨받은 값을 갖고 코드를 짤 수 있다. 보통 파라미터로 넘겨받은 값을 필드 초기화값으로 쓰겠지.
+     }
+  }
+  ```
+  * secondary 생성자
+  ```kotlin
+  class Person {
+    constructor ( value : String ) {
+      Log.d("class", "${value} 출력")
+    }
+    
+    constructor ( value : Int ) { 
+      Log.d("class", "${value} 출력")
+    }
+  }
+  ```
+  * default 생성자 - 생성자를 작성하지 않는 경우 파라미터가 없는 프라이머리 생성자가 하나 있는 것과 동일하다.
+  ```kotlin
+  class Person {
+    init { 
+      // 기본 생성자가 없어도 초기화가 필요하면 여기에 코드를 작성할수 있다.
+    }
+  }
+  ```
+  
+  
+# 9. 오브젝트
+- object를 사용하면 클래스를 생성자로 인스턴스화 하지 않아도 블록 안의 프로퍼티와 메서드를 호출해서 사용할 수 있다.
+- java의 static 과 같은 역할을 한다.
+```kotlin
+object Pig {
+ var name : String = "Pinky"
+   fun printName(){
+     Log.d("class","Pig의 이름은 ${name}입니다.")
+   }
+}
 ```
+
+# 10. 컴패니언 오브젝트
+- 일반 클래스에 obejct 기능을 추가하기위해 사용한다.
+```kotlin 
+class Pig{
+  companion obejct {
+     var name: String = "None"
+     fun printName() {
+       Log.d("class", "Pig의 이름은 ${name}입니다.")
+     }
+  }
+  fun walk() {
+  }
+}
+
+...
+Pig.name = "Linda"  // 컴패니언 오브젝트라서 그냥 쓸 수 있음. static 처럼
+Pig.printName() 
+
+val cutePig = Pig()
+cutePig.walk()   // 컴패니언 오브젝트가 아니라서 Pig 생성자를 부른후에 함수를 사용할 수 있다.
+```
+
+# 11. 데이터 클래스
+- 일반 클래스에서 toString() 을 호출하면 주소값을 호출하지만 data class 는 값을 반환하기 때문에 모니터링에 편리함
+- init 사용가능.
+```
+data class 클래스명 ( val 파라미터1: 타입, var 파라미터2: 타입)
+```
+
+# 12. 스코프 함수
+* run, apply, with
+  * 호출 대상 명칭: this (생략 가능)
+  * apply : 마지막 코드와 상관없이 호출대상인 this 자체를 반환한다. (mutableList 내부 변경 후, 자체 반환) 
+  * run, with : 마지막 실행코드를 반환한다.
+* let, also
+  * 호출 대상 명칭: it (생략 불가)
+  * also :  마지막 코드와 상관없이 호출대상인 this 자체를 반환한다. (mutableList 내부 변경 후, 자체 반환) 
+  * let : 마지막 실행코드를 반환한다.
+ 
