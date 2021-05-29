@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val intent = Intent(this, SubActivity::class.java)
+        intent.putExtra("from1", "Hello Bundle")
+        intent.putExtra("from2", 2021)
+
         val listener = object : View.OnClickListener{
             override fun onClick(v: View?) {
                 Log.d("리스너", "출력되었습니다.")
