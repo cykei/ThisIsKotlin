@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.cykei.basicsyntax.databinding.ActivityMainBinding
@@ -37,6 +40,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.button.setOnClickListener(listener)
+
+        // -- 스피너 테스트 --
+        // 1. 데이터를 작성합니다.
+        var data = listOf("- 선택하세요 -", "BASIC", "EXPERT", "MASTER")
+        // 2. 어댑터를 생성해서 레이아웃과 데이터를 넣어줍니다. 레이아웃은 구글이 기본으로 제공해주는 simple_list_item_1 레이아웃을 사용합니다.
+        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data)
+        // 3. 스피너뷰의 어댑터 속성에 내가 생성한 어댑터를 연결해줍니다.
+        binding.spinner.adapter = adapter
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+               binding.resultSpinner.text = data.get(position)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
