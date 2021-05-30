@@ -3,6 +3,7 @@ package com.cykei.containerrecyclerview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.cykei.containerrecyclerview.databinding.ItemRecyclerBinding
 import java.text.SimpleDateFormat
@@ -27,6 +28,12 @@ class CustomAdapter: RecyclerView.Adapter<Holder>() {
 class Holder(val binding: ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
     // 이 어댑터에서 사용할 레이아웃의 이름이 item_recycler 이기 때문에 안드로이드에서 생성해주는 바인딩의 이름은 ItemRecyclerBinding이 된다.
     // item_recycler.xml -> Holder
+    init {
+        binding.root.setOnClickListener{
+            Toast.makeText(binding.root.context, "클릭된 아이템 = ${binding.textTitle.text}", Toast.LENGTH_LONG).show()
+        }
+    }
+
     fun setMemo(memo: Memo){
         binding.textNo.text = "${memo.no}"
         binding.textTitle.text = "${memo.title}"
