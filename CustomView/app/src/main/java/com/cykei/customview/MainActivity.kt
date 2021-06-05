@@ -16,17 +16,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val customView = CustomView(this)
+        val customView = CustomView("안녕 코틀린" , this)
         binding.frameLayout.addView(customView)
     }
 }
 
-class CustomView(context: Context): View(context){
+class CustomView(text:String, context: Context): View(context){
+    val text: String
+    init {
+        this.text = text
+    }
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         val paint = Paint()
         paint.color = Color.BLACK
         paint.textSize = 100f
-        canvas?.drawText("안녕하세요", 0f, 100f, paint)
+        canvas?.drawText(text, 0f, 100f, paint)
     }
 }
