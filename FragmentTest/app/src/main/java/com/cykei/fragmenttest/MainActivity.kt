@@ -8,15 +8,19 @@ import com.cykei.fragmenttest.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}
     val detailFragment by lazy {DetailFragment()} //디테일 프래그먼트를 매번만드는게 아니라 한번 만들어놓고 계속 쓰겠다.
+    lateinit var listFragment: ListFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setFragment()
+        binding.btnSend.setOnClickListener {
+            listFragment.setValue("전달할 값")
+        }
     }
 
     fun setFragment() {
         // 1. 사용할 프레그먼트 생성
-        val listFragment = ListFragment()
+        listFragment = ListFragment()
 
         // List 프래그먼트에 보낼 값
         var bundle = Bundle()
