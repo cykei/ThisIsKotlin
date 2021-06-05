@@ -17,6 +17,14 @@ class MainActivity : AppCompatActivity() {
     fun setFragment() {
         // 1. 사용할 프레그먼트 생성
         val listFragment = ListFragment()
+
+        // List 프래그먼트에 보낼 값
+        var bundle = Bundle()
+        bundle.putString("key1", "List Fragment")
+        bundle.putInt("key2", 20210605)
+
+        listFragment.arguments = bundle
+
         // 2. 트랜잭션 생성
         val transaction = supportFragmentManager.beginTransaction()
         // 3. 트랜잭션을 통해 프래그먼트 삽입

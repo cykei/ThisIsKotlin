@@ -24,6 +24,8 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.textTitle.text = arguments?.getString("key1")
+        binding.textValue.text = arguments?.getInt("key2").toString()
         //return inflater.inflate(R.layout.fragment_list, container, false)
         return binding.root
     }
