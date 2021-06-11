@@ -22,10 +22,18 @@ class ReceiverFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setFragmentResultListener("request"){key, bundle ->
             // 값을 보내는 측 프래그먼트에서 "request"라는 키로 값을 보내면 이 리스터가 작동한다.
-            bundle.getString("valueKey")?.let{
-                // let : valueKey에 해당하는 값이 있을때만 화면의 textReceiver에 값을 세팅한다.
-                binding.textReceiver.setText(it)
-                //binding.textReceiver.text = it
+
+
+            // 아래 방법은 중간에 변수를 하나더 생성하기 때문에 낭비가 존재함.
+//            bundle.getString("valueKey")?.let{
+//                // let : valueKey에 해당하는 값이 있을때만 화면의 textReceiver에 값을 세팅한다.
+//                binding.textReceiver.setText(it)
+//                //binding.textReceiver.text = it
+//            }
+
+            val valueKey = bundle.getString("valueKey")
+            if(valueKey!=null){
+                binding.textReceiver.setText(valueKey)
             }
         }
     }
