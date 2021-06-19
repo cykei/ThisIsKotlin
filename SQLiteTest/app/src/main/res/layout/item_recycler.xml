@@ -31,7 +31,7 @@
         android:maxLines="2"
         android:text="메모내용 표시"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
         app:layout_constraintStart_toEndOf="@+id/textNo"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,4 +45,16 @@
         android:text="2021-06-19 06:50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:text="삭제"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textContent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
