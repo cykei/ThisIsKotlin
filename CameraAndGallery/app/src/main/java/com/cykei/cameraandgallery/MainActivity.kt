@@ -21,6 +21,7 @@ class MainActivity : BaseActivity() {
     val PERM_STORAGE = 9
     val PERM_CAMERA = 10
     val REQ_CAMERA = 11
+    val REQ_STORAGE = 12
 
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -37,6 +38,15 @@ class MainActivity : BaseActivity() {
         binding.buttonCamera.setOnClickListener {
             requirePermissions(arrayOf(Manifest.permission.CAMERA), PERM_CAMERA)
         }
+        binding.buttonGallery.setOnClickListener {
+            openGallery()
+        }
+    }
+
+    fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        startActivityForResult(intent, REQ_STORAGE)
     }
 
     // 사진을 찍었을 때, 내 폰에 사진이 저장될 위치
@@ -118,6 +128,11 @@ class MainActivity : BaseActivity() {
                         binding.imagePreview.setImageBitmap(bitmap)
 
                         realUri = null
+                    }
+                }
+                REQ_STORAGE -> {
+                    data?.data?.let { uri ->
+                        binding.imagePreview.setImageURI(uri)
                     }
                 }
             }
