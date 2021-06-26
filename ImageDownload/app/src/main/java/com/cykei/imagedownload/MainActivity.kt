@@ -20,18 +20,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.buttonDownload.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                binding.progress.visibility = View.VISIBLE
-                val url = binding.editUrl.text.toString()
-                val bitmap = withContext(Dispatchers.IO) {
-                    loadImage(url)
-                    // 로드 이미지가 완료될때까지 다음 줄이 실행되지 않는다.
+        binding.run {
+            buttonDownload.setOnClickListener {
+                CoroutineScope(Dispatchers.Main).launch {
+                    progress.visibility = View.VISIBLE
+                    val url = binding.editUrl.text.toString()
+                    val bitmap = withContext(Dispatchers.IO) {
+                        loadImage(url)
+                        // 로드 이미지가 완료될때까지 다음 줄이 실행되지 않는다.
+                    }
+                    imagePreview.setImageBitmap(bitmap)
+                    progress.visibility = View.GONE
                 }
-                binding.imagePreview.setImageBitmap(bitmap)
-                binding.progress.visibility = View.GONE
             }
         }
+
     }
 }
 
