@@ -2,13 +2,26 @@ package com.cykei.servicetest
 
 import android.app.Service
 import android.content.Intent
+import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 
 class MyService : Service() {
+    inner class MyBinder: Binder() {
+        // 액티비티와 서비스가 연결되면 바인더의 getService() 메서드를 통해 서비스에 접근 가능
+        fun getService(): MyService {
+            return this@MyService
+        }
+    }
+
+    val binder = MyBinder()
 
     override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
+        return binder
+    }
+
+    fun serviceMessage(): String {
+        return " Hello Activity! I am Service!"
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
